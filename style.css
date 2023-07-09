@@ -15,14 +15,14 @@
 }
 
 .logo {
-    width: 150px;
-    height: 100px;
+    width: 200px;
+    height: 175px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
-    border: solid 5px royalblue;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .05);
     /* border-radius: 1vw; */
 }
 
@@ -69,8 +69,9 @@
 }
 
 .search {
+    margin: 20px;
     padding: 20px;
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     font-weight: 300;
     text-decoration: underline
 }

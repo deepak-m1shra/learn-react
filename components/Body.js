@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard"
 import { useState, useEffect } from 'react'
 import Shimmer from "./Shimmer";
+import Footer from "./Footer";
 
 export default function () {
     const [restaurants, setRestaurants] = useState([])
@@ -29,22 +30,22 @@ export default function () {
 
     // Conditional rendering
     return restaurants.length === 0 ? <Shimmer /> : (
-        <div className='body'>
-            <div className='search'>
+        <div className="bg-">
+            <div>
                 <input type="text"
-                    className="search-txt"
+                    className="m-4 relative"
                     placeholder="Enter a restaurant name to search"
                     value={searchText}
                     onChange={handleChange} />
-                <button onClick={() => {
+                <button className="w-16 rounded-lg" onClick={() => {
                     let filteredRestaurants = restaurants.filter((res) => res.data.name.toLowerCase().includes(searchText.toLowerCase()))
                     setSearchResult(filteredRestaurants)
-                }}>Go</button>
+                }}>Search</button>
             </div>
 
-            <div className="filter">
+            <div className="m-4">
                 <button
-                    className="filter-btn"
+                    className="bg-green-300 content-evenly rounded-lg"
                     onClick={() => {
                         const topRatedList = searchResult.filter((res) =>
                             res.data.avgRating > 4);
@@ -53,14 +54,17 @@ export default function () {
                     Top Rated Restaurants
                 </button>
             </div>
-            <div>List of Restaurants</div>
-            <div className='restaurant-container'>
+            <div className="m-4">
+                <span className="font-extrabold">List of Restaurants</span>
+            </div>
+            <div className='m-4 p-4 flex flex-wrap'>
                 {
                     searchResult.map((rest, index) => {
                         return <RestaurantCard key={index} restaurant={rest} />
                     })
                 }
             </div>
+            <Footer />
         </div>
     )
 };

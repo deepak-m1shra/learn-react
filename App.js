@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import Body from './components/Body'
 import Header from './components/Header'
@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import About from './components/About'
 import Contact from './components/Contact'
 import Error from './components/Error'
+import UserContext from './utils/UserContext'
 
 
 // Example of lazy loading
@@ -26,13 +27,27 @@ const Electronics = lazy(() => import('./components/Electronics'))
  */
 
 const AppLayout = () => {
+    const [user, setUser] = useState({
+        fName: "Dee",
+        lastName: "Doe"
+    })
     return (
+
         <div className="app">
-            <Header />
-            <Outlet />
-            {/* <Body /> */}
-            {/* <About /> */}
-        </div>
+            <UserContext.Provider
+                value={
+                    {
+                        user: user,
+                        setUser: setUser
+                    }
+                }>
+                <Header />
+                <Outlet />
+                {/* <Body /> */}
+                {/* <About /> */}
+            </UserContext.Provider>
+
+        </div >
     )
 }
 

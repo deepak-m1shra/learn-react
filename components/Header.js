@@ -1,12 +1,15 @@
 import img from '../assets/food-order-logo.png'
-import { useState, lazy } from 'react'
+import { useState, lazy, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import useOnlineStatus from '../utils/useOnlineStatus'
+import UserContext from '../utils/UserContext'
+
 
 
 export default function Header() {
     const [loggedInStatus, setLoggedInStatus] = useState("Login")
     const onlineStatus = useOnlineStatus()
+    const { user } = useContext(UserContext)
 
     return (
         <div className='flex justify-between shadow-xl m-2 bg-cyan-300'>
@@ -35,8 +38,10 @@ export default function Header() {
                         loggedInStatus === "Login" ?
                             setLoggedInStatus("Logout") : setLoggedInStatus("Login")
                     }}>{loggedInStatus}</button>
+
                 </ul>
             </div>
+            <span className='text-lg text-blue-600 mr-1'>Hello, {user.fName}</span>
         </div >
     )
 };

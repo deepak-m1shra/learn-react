@@ -1,12 +1,14 @@
 import RestaurantCard from "./RestaurantCard"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Shimmer from "./Shimmer";
 import Footer from "./Footer";
+import UserContext from "../utils/UserContext";
 
 export default function () {
     const [restaurants, setRestaurants] = useState([])
     const [searchResult, setSearchResult] = useState([])
     const [searchText, setSearchText] = useState("")
+    const { user, setUser } = useContext(UserContext)
 
 
     useEffect(() => {
@@ -41,6 +43,19 @@ export default function () {
                     let filteredRestaurants = restaurants.filter((res) => res.data.name.toLowerCase().includes(searchText.toLowerCase()))
                     setSearchResult(filteredRestaurants)
                 }}>Search</button>
+                <input type="text"
+                    placeholder="Context demo in progress..."
+                    onChange={
+                        e => setUser({
+                            ...user,
+                            fName: e.target.value
+                        })
+                    }
+                    value={user.fName}
+                    className="border-red-700 border-2 hidden"
+                >
+
+                </input>
             </div>
 
             <div className="m-4">
@@ -65,6 +80,6 @@ export default function () {
                 }
             </div>
             <Footer />
-        </div>
+        </div >
     )
 };
